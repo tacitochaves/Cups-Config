@@ -28,3 +28,5 @@ for my $printer ( keys %{ $cnf->config } ) {
         print "Impressora " . $printer . " esta Block \n";
     }
 }
+
+print "Andre Scrivener"
