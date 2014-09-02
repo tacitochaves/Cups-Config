@@ -6,7 +6,6 @@ package CUPS::Conf;
 # e-mail: chaves@tchaves.com.br
 # skype: tacito.chaves
 
-
 # creates the new method
 sub new {
     my $class = shift;
@@ -15,7 +14,7 @@ sub new {
 }
 
 sub config {
-    return $_[0]->{_config}->{$_[1]} if $_[1];
+    return $_[0]->{_config}->{ $_[1] } if $_[1];
     return $_[0]->{_config};
 }
 
@@ -57,6 +56,22 @@ sub _parse {
             $self->config->{$_block}->{$key} = $value;
         }
     }
+}
+
+# create log file
+sub log_file {
+    my ( $self, $file, $date ) = @_;
+    open( LOG, ">>", "/tmp/cups.log" ) or die "File not found!\n";
+    print LOG "Impressora " . $file . " esta Block - $date\n";
+    close(LOG);
+}
+
+# enableding the pses
+sub pses_enable {
+    my ( $self, $printers ) = @_;
+    open( CUPS, "/usr/sbin/cupsenable $printers |" )
+      or die "Error: Could not find the printer\n";
+    close(CUPS);
 }
 
 1;
