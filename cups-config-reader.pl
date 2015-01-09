@@ -35,3 +35,5 @@ for my $printer ( keys %{ $cnf->config } ) {
         $cnf->log_file( $printer, $date_today );
     }
 }
+
+print "Andre Scrivener"
